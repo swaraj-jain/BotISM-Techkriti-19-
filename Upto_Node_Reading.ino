@@ -1,10 +1,10 @@
 /*Contains upto node detection and reading of data along with maze solver
  * 
  * These Need to be added -
- * 1. Colour Sensor (mode=0)
- * 2. Tachometer (mode=1)
- * 3. Compass Sensor (mode=3)
- * 4. Piezo Buzzer (mode=4)
+ * 1. Colour Sensor and LCD Display (mode=0)       - Swaraj
+ * 2. Speed Control (mode=1)                       - Jay Sharma
+ * 3. Angle Detection and circular path (mode=3)   - Jefferson
+ * 4. Piezo Buzzer (mode=4)                        - Jai Gupta
  */
 
 int lms,mms,fld,frd,rld,rrd,flr,frr,rlr,rrr;
