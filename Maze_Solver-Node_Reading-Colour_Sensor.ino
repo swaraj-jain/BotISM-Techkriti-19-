@@ -1,4 +1,4 @@
-/*Contains upto node detection and reading of data along with maze solver
+/*Contains upto maze solver, node detection, reading of data, and colour sensor
  * 
  * These Need to be added -
  * 1. Speed Control (mode=1)
