@@ -251,7 +251,7 @@ void loop()
           yi = Wire.read() << 8; //MSB y
           yi |= Wire.read(); //LSB y
           mag = sqrt(x * x + y * y);
-          anglei = asin(x / mag);
+          anglei = 180*asin(x / mag)/PI;
         }
 
         while (lms == LOW) //Taking A Left Till The Bot is On the Circle Without Re-Encountering the initial Path
@@ -287,7 +287,7 @@ void loop()
           y = Wire.read() << 8; //MSB y
           y |= Wire.read(); //LSB y
           mag = sqrt(x * x + y * y);
-          angle = asin(x / mag);
+          angle = 180*asin(x / mag)/PI;
         }
 
         int diff = anglei - angle;
