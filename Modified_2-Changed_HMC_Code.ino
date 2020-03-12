@@ -30,7 +30,7 @@ int req_angle, init_angle;
 int xi, yi, zi, anglei;     //triple axis data Initially
 int x, y, z, angle;         //triple axis data and Net Magnitude Along Plane
 int mag, turned;
-boolean firstencounter;
+int firstencounter, first;
 
 LiquidCrystal lcd(25, 26, 27, 28, 29, 30);  //(rs,enable,d4,d5,d6,d7)
 DFRobot_QMC5883 compass;
@@ -207,7 +207,7 @@ void loop()
       }
     }
     else if (mode == 1)                               //Speed Control Part
-    {
+    {    
       if (digitalRead(2) == HIGH && counter == 0)     //When the North Pole is Encountered
       {
         before  = millis();                           //Read the Current Time
@@ -219,17 +219,24 @@ void loop()
       }
       else if (digitalRead(2) == HIGH && counter == 2) //When the North Pole is Encountered the Second Time
       {
-        after = millis();                             //Read the Current Time
-        unsigned int duration = after - before;
-        double sp = PI * dia * 1000.0 / duration;     //Calculate Current Speed
-        if (sp > (dec / 5.0))                         //If Current Speed > Required Speed, reduce it to half
+        if(first)                                       //Skip the first reading as it may contain random errors
         {
-          currpwm = currpwm / 2;
-          analogWrite(3, currpwm);
+          after = millis();                             //Read the Current Time
+          unsigned int duration = after - before;
+          double sp = PI * dia * 1000.0 / duration;     //Calculate Current Speed
+          if (sp > (dec / 5.0))                         //If Current Speed > Required Speed, reduce it to half
+          {
+            currpwm = currpwm / 2;
+            analogWrite(3, currpwm);
+          }
+          else                                          //Speed Controlling is complete
+          {
+            counter = 3;
+          }
         }
-        else                                          //Speed Controlling is complete
+        else
         {
-          counter = 3;
+          first = 1;
         }
         counter = 0;
       }
@@ -315,7 +322,9 @@ void loop()
 
         int diff = anglei - angle;
 
-        if (diff > 85 - req_angle && diff < 95 - req_angle) //If its the path with error tolerance 10 turn left
+        if ((diff > 85 - req_angle && diff < 95 - req_angle)                 //If its the path with error tolerance 10 turn left
+            ||(diff > 360 + 85 - req_angle && diff < 360 + 95 - req_angle)   //This case arises when anglei ~ 360- and angle ~ 0+
+            ||(diff > 85 - req_angle - 360 && diff < 95 - req_angle - 360))  //This case arises when anglei ~ 0+ and angle ~ 360-
         {
           digitalWrite(4, LOW);
           digitalWrite(5, HIGH);
