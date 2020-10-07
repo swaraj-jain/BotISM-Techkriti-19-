@@ -15,8 +15,8 @@ void setup() {
   pinMode(sensorop, INPUT);   //frequency measure
   
   
-  digitalWrite(S0,HIGH);      // Setting frequency-scaling to 20%
-  digitalWrite(S1,LOW);       // Setting frequency-scaling to 20%
+  digitalWrite(S0,HIGH);      // Setting frequency-scaling to 30%
+  digitalWrite(S1,LOW);       // Setting frequency-scaling to 30%
   
   Serial.begin(9600);
 }
