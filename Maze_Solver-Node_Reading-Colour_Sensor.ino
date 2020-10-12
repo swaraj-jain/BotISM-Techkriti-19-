@@ -115,7 +115,7 @@ void loop()
         digitalWrite(6, HIGH);
         digitalWrite(7, LOW);
       }
-      else                                        //Go straight otherwise
+      else                                        //Go straight  otherwise
       {
         digitalWrite(4, HIGH);
         digitalWrite(5, LOW);
