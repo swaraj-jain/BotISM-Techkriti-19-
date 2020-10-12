@@ -1,6 +1,6 @@
 /* Contains upto node detection and reading of data along with maze solver
  * These Need to be added -
- * 1. Colour Sensor and LCD Display (mode=0)       - Swaraj
+ * 1. Colour Sensor and LCD Display (mode=0)       - Swaraj Jain
  * 2. Speed Control (mode=1)                       - Jay Sharma
  * 3. Angle Detection and circular path (mode=3)   - Jefferson
  * 4. Piezo Buzzer (mode=4)                        - Jai Gupta
